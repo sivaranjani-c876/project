@@ -1,590 +1,510 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chai Point — Online Tea Ordering</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<title>Tea Time | Online Tea Ordering</title>
+
 <style>
 :root {
-  --tea-brown: #4A3728;
-  --tea-brown-dark: #2E2117;
-  --amber: #C1863B;
-  --amber-light: #E4A85C;
-  --leaf-green: #7C8A5E;
-  --cream: #FAF3E6;
-  --cream-card: #FFFCF7;
-  --text-dark: #2B2118;
-  --text-muted: #7A6D5F;
-  --border-soft: #E7DCC9;
+    --green: #245c43;
+    --dark: #173d2d;
+    --cream: #fff8ed;
+    --orange: #e5a15c;
+    --white: #ffffff;
+    --text: #28352d;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* {
+    box-sizing: border-box;
+}
 
 body {
-  font-family: 'Inter', sans-serif;
-  background: var(--cream);
-  color: var(--text-dark);
-  line-height: 1.5;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: var(--cream);
+    color: var(--text);
 }
 
-h1, h2, h3 {
-  font-family: 'Fraunces', serif;
+header {
+    background: var(--dark);
+    color: white;
+    padding: 24px 15px;
+    text-align: center;
 }
 
-/* Header */
-.site-header {
-  background: var(--tea-brown);
-  color: var(--cream);
-  padding: 28px 40px;
+header h1 {
+    margin: 0;
+    font-size: 32px;
 }
 
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  max-width: 1100px;
-  margin: 0 auto;
+header p {
+    margin-bottom: 0;
+    color: #e0e9e1;
 }
 
-.brand-mark {
-  font-size: 2.2rem;
+.container {
+    width: 92%;
+    max-width: 950px;
+    margin: 25px auto;
 }
 
-.brand h1 {
-  font-size: 1.8rem;
-  font-weight: 700;
-  letter-spacing: 0.3px;
+.card {
+    background: white;
+    padding: 24px;
+    margin-bottom: 22px;
+    border-radius: 14px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.07);
 }
 
-.tagline {
-  color: var(--amber-light);
-  font-size: 0.9rem;
-  margin-top: 2px;
+h2 {
+    color: var(--green);
+    margin-top: 0;
 }
 
-/* Layout */
-.layout {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 40px 24px 60px;
-  display: grid;
-  grid-template-columns: 1.6fr 1fr;
-  gap: 36px;
-  align-items: start;
+.subtitle {
+    color: #777;
+    font-size: 14px;
+    margin-top: -8px;
+    margin-bottom: 22px;
 }
 
-@media (max-width: 800px) {
-  .layout {
-    grid-template-columns: 1fr;
-  }
+.menu {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 15px;
 }
 
-.menu-section h2,
-.bill-panel h2 {
-  font-size: 1.4rem;
-  margin-bottom: 18px;
-  color: var(--tea-brown-dark);
+.tea {
+    padding: 18px;
+    background: #f4f7ef;
+    border: 1px solid #e6ebdf;
+    border-radius: 12px;
 }
 
-/* Menu grid */
-.menu-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-  gap: 18px;
+.tea h3 {
+    margin: 0 0 8px;
 }
 
-.tea-card {
-  background: var(--cream-card);
-  border: 1px solid var(--border-soft);
-  border-radius: 10px;
-  padding: 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+.tea p {
+    color: var(--green);
+    font-weight: bold;
 }
 
-.tea-card .tea-icon {
-  font-size: 1.6rem;
+.tea label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
 }
 
-.tea-card h3 {
-  font-size: 1.05rem;
-  color: var(--text-dark);
+.quantity {
+    width: 75px;
+    padding: 9px;
+    text-align: center;
 }
 
-.tea-card .tea-desc {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  flex-grow: 1;
+label {
+    display: block;
+    margin-top: 14px;
+    font-weight: bold;
+    font-size: 14px;
 }
 
-.tea-card .tea-price {
-  font-weight: 600;
-  color: var(--amber);
-  font-size: 1rem;
+input, textarea, select {
+    width: 100%;
+    padding: 12px;
+    margin-top: 7px;
+    border: 1px solid #ccd4cb;
+    border-radius: 7px;
+    font-size: 15px;
+    font-family: inherit;
 }
 
-.tea-card .qty-controls {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 8px;
+textarea {
+    resize: vertical;
 }
 
-.qty-btn {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  border: 1px solid var(--border-soft);
-  background: var(--cream);
-  color: var(--tea-brown);
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background 0.15s ease;
+input:focus, textarea:focus {
+    outline: 2px solid #b5d4bd;
+    border-color: var(--green);
 }
 
-.qty-btn:hover {
-  background: var(--amber-light);
-  color: #fff;
+button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    background: var(--green);
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
 }
 
-.qty-value {
-  font-weight: 600;
-  min-width: 20px;
-  text-align: center;
+button:hover {
+    background: var(--dark);
 }
 
-/* Bill panel */
-.bill-panel {
-  background: var(--cream-card);
-  border: 1px solid var(--border-soft);
-  border-radius: 12px;
-  padding: 24px;
-  position: sticky;
-  top: 24px;
+.bill-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid #e5e5e5;
 }
 
-.bill-items {
-  min-height: 60px;
-  margin-bottom: 16px;
+.bill-total {
+    color: var(--green);
+    font-size: 23px;
+    font-weight: bold;
+    margin-top: 18px;
 }
 
-.empty-state {
-  color: var(--text-muted);
-  font-size: 0.9rem;
+.notice {
+    background: #fff3d9;
+    padding: 12px;
+    border-radius: 7px;
+    font-size: 13px;
+    line-height: 1.6;
 }
 
-.bill-line {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.9rem;
-  padding: 6px 0;
-  border-bottom: 1px dashed var(--border-soft);
+footer {
+    text-align: center;
+    padding: 20px;
+    background: var(--dark);
+    color: white;
 }
 
-.bill-line .line-name {
-  color: var(--text-dark);
-}
+@media (max-width: 600px) {
+    .menu {
+        grid-template-columns: 1fr;
+    }
 
-.bill-line .line-qty {
-  color: var(--text-muted);
+    .card {
+        padding: 17px;
+    }
 }
-
-.bill-summary {
-  border-top: 1px solid var(--border-soft);
-  padding-top: 14px;
-  margin-top: 6px;
-}
-
-.summary-row {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.92rem;
-  padding: 4px 0;
-  color: var(--text-muted);
-}
-
-.total-row {
-  font-weight: 700;
-  font-size: 1.1rem;
-  color: var(--tea-brown-dark);
-  padding-top: 10px;
-  border-top: 1px solid var(--border-soft);
-  margin-top: 6px;
-}
-
-.customer-fields {
-  margin-top: 18px;
-}
-
-.customer-fields label {
-  display: block;
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  margin-bottom: 6px;
-}
-
-.customer-fields input {
-  width: 100%;
-  padding: 10px 12px;
-  border: 1px solid var(--border-soft);
-  border-radius: 8px;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.95rem;
-}
-
-.generate-btn, .clear-btn {
-  width: 100%;
-  padding: 12px;
-  border: none;
-  border-radius: 8px;
-  font-family: 'Inter', sans-serif;
-  font-weight: 600;
-  font-size: 0.95rem;
-  cursor: pointer;
-  margin-top: 12px;
-  transition: opacity 0.15s ease;
-}
-
-.generate-btn {
-  background: var(--leaf-green);
-  color: #fff;
-}
-
-.clear-btn {
-  background: transparent;
-  color: var(--text-muted);
-  border: 1px solid var(--border-soft);
-}
-
-.generate-btn:hover, .clear-btn:hover {
-  opacity: 0.85;
-}
-
-/* Receipt overlay */
-.receipt-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(43, 33, 24, 0.55);
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  z-index: 100;
-}
-
-.receipt-overlay.active {
-  display: flex;
-}
-
-.receipt {
-  background: #fff;
-  border-radius: 10px;
-  padding: 28px;
-  max-width: 360px;
-  width: 100%;
-  position: relative;
-  font-family: 'Inter', sans-serif;
-}
-
-.close-receipt {
-  position: absolute;
-  top: 12px;
-  right: 14px;
-  background: none;
-  border: none;
-  font-size: 1.4rem;
-  color: var(--text-muted);
-  cursor: pointer;
-}
-
-.receipt h3 {
-  text-align: center;
-  color: var(--tea-brown-dark);
-}
-
-.receipt-meta {
-  text-align: center;
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  margin-bottom: 12px;
-}
-
-.receipt-line {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.88rem;
-  padding: 4px 0;
-}
-
-.receipt-divider {
-  border-top: 1px dashed var(--border-soft);
-  margin: 10px 0;
-}
-
-.print-btn {
-  width: 100%;
-  padding: 10px;
-  margin-top: 16px;
-  border: none;
-  border-radius: 8px;
-  background: var(--tea-brown);
-  color: #fff;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-/* Footer */
-.site-footer {
-  text-align: center;
-  padding: 20px;
-  color: var(--text-muted);
-  font-size: 0.8rem;
-}
-
-@media print {
-  .site-header, .layout, .site-footer { display: none; }
-  .receipt-overlay { position: static; background: none; display: block; }
-  .receipt { box-shadow: none; }
-  .close-receipt, .print-btn { display: none; }
-}
-
 </style>
 </head>
+
 <body>
 
-  <header class="site-header">
-    <div class="brand">
-      <span class="brand-mark">☕</span>
-      <div>
-        <h1>Chai Point</h1>
-        <p class="tagline">Fresh tea, brewed to order</p>
-      </div>
-    </div>
-  </header>
+<header>
+    <h1>☕ Tea Time</h1>
+    <p>Fresh Tea, Happy Moments!</p>
+</header>
 
-  <main class="layout">
+<main class="container">
 
-    <section class="menu-section" aria-labelledby="menu-heading">
-      <h2 id="menu-heading">Today's Menu</h2>
-      <div class="menu-grid" id="menuGrid"></div>
+    <section class="card">
+        <h2>Our Tea Menu</h2>
+        <p class="subtitle">Select your favourite tea and quantity.</p>
+
+        <div class="menu">
+
+            <div class="tea">
+                <h3>☕ Regular Tea</h3>
+                <p>₹15 / cup</p>
+                <label for="regular">
+                    Quantity
+                    <input class="quantity" id="regular"
+                        type="number" min="0" max="1000"
+                        step="1" value="0">
+                </label>
+            </div>
+
+            <div class="tea">
+                <h3>🫚 Ginger Tea</h3>
+                <p>₹20 / cup</p>
+                <label for="ginger">
+                    Quantity
+                    <input class="quantity" id="ginger"
+                        type="number" min="0" max="1000"
+                        step="1" value="0">
+                </label>
+            </div>
+
+            <div class="tea">
+                <h3>🍵 Masala Tea</h3>
+                <p>₹25 / cup</p>
+                <label for="masala">
+                    Quantity
+                    <input class="quantity" id="masala"
+                        type="number" min="0" max="1000"
+                        step="1" value="0">
+                </label>
+            </div>
+
+            <div class="tea">
+                <h3>🌿 Green Tea</h3>
+                <p>₹25 / cup</p>
+                <label for="green">
+                    Quantity
+                    <input class="quantity" id="green"
+                        type="number" min="0" max="1000"
+                        step="1" value="0">
+                </label>
+            </div>
+
+            <div class="tea">
+                <h3>🌱 Sukku Malli Tea</h3>
+                <p>₹25 / cup</p>
+                <label for="sukku">
+                    Quantity
+                    <input class="quantity" id="sukku"
+                        type="number" min="0" max="1000"
+                        step="1" value="0">
+                </label>
+            </div>
+
+            <div class="tea">
+                <h3>🫖 Black Tea</h3>
+                <p>₹15 / cup</p>
+                <label for="black">
+                    Quantity
+                    <input class="quantity" id="black"
+                        type="number" min="0" max="1000"
+                        step="1" value="0">
+                </label>
+            </div>
+
+        </div>
     </section>
 
-    <aside class="bill-panel" aria-labelledby="bill-heading">
-      <h2 id="bill-heading">Your Order</h2>
+    <section class="card">
+        <h2>Customer Details</h2>
 
-      <div class="bill-items" id="billItems">
-        <p class="empty-state">Nothing added yet. Pick a tea to get started.</p>
-      </div>
+        <form id="orderForm">
+            <label for="customerName">Full Name</label>
+            <input id="customerName" type="text"
+                placeholder="Enter your name" required>
 
-      <div class="bill-summary">
-        <div class="summary-row">
-          <span>Subtotal</span>
-          <span id="subtotal">₹0</span>
-        </div>
-        <div class="summary-row">
-          <span>Tax (5%)</span>
-          <span id="tax">₹0</span>
-        </div>
-        <div class="summary-row total-row">
-          <span>Total</span>
-          <span id="total">₹0</span>
-        </div>
-      </div>
+            <label for="customerPhone">Mobile Number</label>
+            <input id="customerPhone" type="tel"
+                inputmode="numeric" pattern="[0-9]{10}"
+                maxlength="10" placeholder="10-digit number"
+                required>
 
-      <div class="customer-fields">
-        <label for="customerName">Name</label>
-        <input type="text" id="customerName" placeholder="Enter your name">
-      </div>
+            <label for="address">Delivery Address</label>
+            <textarea id="address" rows="3"
+                placeholder="Enter your full address" required></textarea>
 
-      <button class="generate-btn" id="generateBtn">Generate Bill</button>
-      <button class="clear-btn" id="clearBtn">Clear Order</button>
-    </aside>
+            <label for="notes">Additional Notes (Optional)</label>
+            <input id="notes" type="text"
+                placeholder="Less sugar, extra ginger, etc.">
 
-  </main>
+            <button type="button" id="generateBill">
+                Generate Bill
+            </button>
 
-  <div class="receipt-overlay" id="receiptOverlay">
-    <div class="receipt" id="receipt">
-      <button class="close-receipt" id="closeReceipt" aria-label="Close receipt">&times;</button>
-      <div id="receiptContent"></div>
-      <button class="print-btn" id="printBtn">Print Bill</button>
-    </div>
-  </div>
+            <h2 style="margin-top:25px;">Your Bill</h2>
 
-  <footer class="site-footer">
-    <p>Chai Point &mdash; Online Tea Ordering and Billing System</p>
-  </footer>
+            <div id="bill" aria-live="polite">
+                <p>No items selected yet.</p>
+            </div>
 
-  <script>
-// ---- Menu data ----
-const menu = [
-  { id: 1, name: "Masala Chai", icon: "🍵", desc: "Classic spiced milk tea", price: 20 },
-  { id: 2, name: "Ginger Tea", icon: "🫖", desc: "Bold and warming", price: 20 },
-  { id: 3, name: "Green Tea", icon: "🍃", desc: "Light and refreshing", price: 25 },
-  { id: 4, name: "Lemon Tea", icon: "🍋", desc: "Zesty black tea", price: 20 },
-  { id: 5, name: "Cardamom Chai", icon: "🌿", desc: "Fragrant elaichi chai", price: 25 },
-  { id: 6, name: "Black Coffee", icon: "☕", desc: "Strong and simple", price: 25 },
+            <div class="bill-total" id="total">
+                Total: ₹0
+            </div>
+
+            <button type="submit">
+                Send Order Through WhatsApp
+            </button>
+
+            <p class="notice">
+                WhatsApp opens with your order details ready.
+                Check the message and press Send to place your order.
+            </p>
+        </form>
+    </section>
+
+</main>
+
+<footer>
+    <p>Tea Time | Online Tea Ordering and Billing System</p>
+</footer>
+
+<script>
+"use strict";
+
+const teaMenu = [
+    { id: "regular", name: "Regular Tea", price: 15 },
+    { id: "ginger", name: "Ginger Tea", price: 20 },
+    { id: "masala", name: "Masala Tea", price: 25 },
+    { id: "green", name: "Green Tea", price: 25 },
+    { id: "sukku", name: "Sukku Malli Tea", price: 25 },
+    { id: "black", name: "Black Tea", price: 15 }
 ];
 
-const TAX_RATE = 0.05;
+// IMPORTANT:
+// Replace with the shop owner's real WhatsApp number.
+// Include country code. Use digits only.
+// Example format: 919876543210
+const SHOP_WHATSAPP = "91XXXXXXXXXX";
 
-// cart: { [itemId]: quantity }
-let cart = {};
+let latestOrder = null;
 
-const menuGrid = document.getElementById("menuGrid");
-const billItems = document.getElementById("billItems");
-const subtotalEl = document.getElementById("subtotal");
-const taxEl = document.getElementById("tax");
-const totalEl = document.getElementById("total");
-const generateBtn = document.getElementById("generateBtn");
-const clearBtn = document.getElementById("clearBtn");
-const receiptOverlay = document.getElementById("receiptOverlay");
-const receiptContent = document.getElementById("receiptContent");
-const closeReceipt = document.getElementById("closeReceipt");
-const printBtn = document.getElementById("printBtn");
-const customerNameInput = document.getElementById("customerName");
+function readOrder() {
+    const items = [];
+    let total = 0;
 
-// ---- Render menu ----
-function renderMenu() {
-  menuGrid.innerHTML = menu.map(item => `
-    <div class="tea-card">
-      <span class="tea-icon">${item.icon}</span>
-      <h3>${item.name}</h3>
-      <p class="tea-desc">${item.desc}</p>
-      <p class="tea-price">₹${item.price}</p>
-      <div class="qty-controls">
-        <button class="qty-btn" data-action="decrease" data-id="${item.id}">−</button>
-        <span class="qty-value" id="qty-${item.id}">${cart[item.id] || 0}</span>
-        <button class="qty-btn" data-action="increase" data-id="${item.id}">+</button>
-      </div>
-    </div>
-  `).join("");
+    for (const tea of teaMenu) {
+        const input = document.getElementById(tea.id);
+        const raw = input.value.trim();
+        const quantity = Number(raw);
+
+        if (
+            raw === "" ||
+            !Number.isSafeInteger(quantity) ||
+            quantity < 0 ||
+            quantity > 1000
+        ) {
+            alert("Please enter a whole quantity between 0 and 1000.");
+            input.focus();
+            return null;
+        }
+
+        if (quantity > 0) {
+            const subtotal = quantity * tea.price;
+
+            items.push({
+                name: tea.name,
+                quantity: quantity,
+                price: tea.price,
+                subtotal: subtotal
+            });
+
+            total += subtotal;
+        }
+    }
+
+    if (items.length === 0) {
+        alert("Please select at least one tea.");
+        return null;
+    }
+
+    return { items, total };
 }
 
-// ---- Update quantity ----
-function updateQty(id, delta) {
-  const current = cart[id] || 0;
-  const next = Math.max(0, current + delta);
-  if (next === 0) {
-    delete cart[id];
-  } else {
-    cart[id] = next;
-  }
-  document.getElementById(`qty-${id}`).textContent = cart[id] || 0;
-  renderBill();
+function generateBill(showAlert = true) {
+    const order = readOrder();
+
+    if (!order) {
+        latestOrder = null;
+        return false;
+    }
+
+    latestOrder = order;
+
+    const bill = document.getElementById("bill");
+    bill.replaceChildren();
+
+    order.items.forEach(function(item) {
+        const row = document.createElement("div");
+        row.className = "bill-row";
+
+        const name = document.createElement("span");
+        name.textContent =
+            item.name + " × " + item.quantity +
+            " (₹" + item.price + " each)";
+
+        const amount = document.createElement("strong");
+        amount.textContent = "₹" + item.subtotal;
+
+        row.append(name, amount);
+        bill.appendChild(row);
+    });
+
+    document.getElementById("total").textContent =
+        "Total: ₹" + order.total;
+
+    return true;
 }
 
-// ---- Render order/bill panel ----
-function renderBill() {
-  const entries = Object.entries(cart);
+document.getElementById("generateBill")
+    .addEventListener("click", function() {
+        generateBill();
+    });
 
-  if (entries.length === 0) {
-    billItems.innerHTML = `<p class="empty-state">Nothing added yet. Pick a tea to get started.</p>`;
-    subtotalEl.textContent = "₹0";
-    taxEl.textContent = "₹0";
-    totalEl.textContent = "₹0";
-    return;
-  }
-
-  let subtotal = 0;
-  billItems.innerHTML = entries.map(([id, qty]) => {
-    const item = menu.find(m => m.id === Number(id));
-    const lineTotal = item.price * qty;
-    subtotal += lineTotal;
-    return `
-      <div class="bill-line">
-        <span class="line-name">${item.name}</span>
-        <span class="line-qty">${qty} × ₹${item.price} = ₹${lineTotal}</span>
-      </div>
-    `;
-  }).join("");
-
-  const tax = subtotal * TAX_RATE;
-  const total = subtotal + tax;
-
-  subtotalEl.textContent = `₹${subtotal.toFixed(2)}`;
-  taxEl.textContent = `₹${tax.toFixed(2)}`;
-  totalEl.textContent = `₹${total.toFixed(2)}`;
-}
-
-// ---- Generate printable receipt ----
-function generateBill() {
-  const entries = Object.entries(cart);
-  if (entries.length === 0) {
-    alert("Please add at least one item before generating the bill.");
-    return;
-  }
-
-  const name = customerNameInput.value.trim() || "Guest";
-  const now = new Date();
-  const dateStr = now.toLocaleDateString();
-  const timeStr = now.toLocaleTimeString();
-
-  let subtotal = 0;
-  let linesHTML = "";
-  entries.forEach(([id, qty]) => {
-    const item = menu.find(m => m.id === Number(id));
-    const lineTotal = item.price * qty;
-    subtotal += lineTotal;
-    linesHTML += `
-      <div class="receipt-line">
-        <span>${item.name} × ${qty}</span>
-        <span>₹${lineTotal}</span>
-      </div>
-    `;
-  });
-
-  const tax = subtotal * TAX_RATE;
-  const total = subtotal + tax;
-
-  receiptContent.innerHTML = `
-    <h3>Chai Point</h3>
-    <p class="receipt-meta">${dateStr} &middot; ${timeStr}<br>Customer: ${name}</p>
-    <div class="receipt-divider"></div>
-    ${linesHTML}
-    <div class="receipt-divider"></div>
-    <div class="receipt-line"><span>Subtotal</span><span>₹${subtotal.toFixed(2)}</span></div>
-    <div class="receipt-line"><span>Tax (5%)</span><span>₹${tax.toFixed(2)}</span></div>
-    <div class="receipt-line" style="font-weight:700; font-size:1.05rem;">
-      <span>Total</span><span>₹${total.toFixed(2)}</span>
-    </div>
-    <div class="receipt-divider"></div>
-    <p class="receipt-meta">Thank you for your order!</p>
-  `;
-
-  receiptOverlay.classList.add("active");
-}
-
-// ---- Clear order ----
-function clearOrder() {
-  cart = {};
-  renderMenu();
-  renderBill();
-}
-
-// ---- Event listeners ----
-menuGrid.addEventListener("click", (e) => {
-  const btn = e.target.closest(".qty-btn");
-  if (!btn) return;
-  const id = Number(btn.dataset.id);
-  const delta = btn.dataset.action === "increase" ? 1 : -1;
-  updateQty(id, delta);
+document.querySelectorAll(".quantity").forEach(function(input) {
+    input.addEventListener("input", function() {
+        latestOrder = null;
+    });
 });
 
-generateBtn.addEventListener("click", generateBill);
-clearBtn.addEventListener("click", clearOrder);
-closeReceipt.addEventListener("click", () => receiptOverlay.classList.remove("active"));
-printBtn.addEventListener("click", () => window.print());
-receiptOverlay.addEventListener("click", (e) => {
-  if (e.target === receiptOverlay) receiptOverlay.classList.remove("active");
-});
+document.getElementById("orderForm")
+    .addEventListener("submit", function(event) {
+        event.preventDefault();
 
-// ---- Init ----
-renderMenu();
-renderBill();
+        if (!this.reportValidity()) {
+            return;
+        }
+
+        const name = document.getElementById("customerName")
+            .value.trim();
+        const phone = document.getElementById("customerPhone")
+            .value.trim();
+        const address = document.getElementById("address")
+            .value.trim();
+        const notes = document.getElementById("notes")
+            .value.trim();
+
+        if (!name || !address) {
+            alert("Please enter your name and address.");
+            return;
+        }
+
+        // Validate the shop number before building the message.
+        if (!/^[0-9]{10,15}$/.test(SHOP_WHATSAPP)) {
+            alert(
+                "WhatsApp is not configured. In the code, replace " +
+                "91XXXXXXXXXX with the shop's WhatsApp number, " +
+                "including country code and digits only."
+            );
+            return;
+        }
+
+        // Always use the current quantities for the order.
+        if (!generateBill(false)) {
+            return;
+        }
+
+        const order = latestOrder;
+
+        let message = "NEW TEA ORDER\n";
+        message += "====================\n";
+        message += "Customer: " + name + "\n";
+        message += "Mobile: " + phone + "\n";
+        message += "Address: " + address + "\n\n";
+        message += "ORDER DETAILS\n";
+
+        order.items.forEach(function(item) {
+            message += item.name + " x " +
+                item.quantity + " = Rs." +
+                item.subtotal + "\n";
+        });
+
+        message += "\nTOTAL AMOUNT: Rs." + order.total;
+
+        if (notes) {
+            message += "\nNotes: " + notes;
+        }
+
+        const whatsappURL =
+            "https://wa.me/" + SHOP_WHATSAPP +
+            "?text=" + encodeURIComponent(message);
+
+        // Open WhatsApp directly from the user's click.
+        window.location.href = whatsappURL;
+    });
 
 </script>
+
 </body>
 </html>
+
+
+ 
